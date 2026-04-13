@@ -1,0 +1,61 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(npx playwright test*)",
+      "Bash(npm run*)",
+      "Bash(npm install*)",
+      "Bash(ls*)",
+      "Bash(cat*)"
+    ]
+  },
+  "hooks": {
+    "PostToolUse": [
+      {
+        "matcher": "mcp__playwright-test__test_run",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "INPUT=$(cat); FCOUNT=$(echo \"$INPUT\" | jq -r '(.tool_response.failed // (.tool_response.results // [] | map(select(.status == \"failed\")) | length))' 2>/dev/null | grep -E '^[0-9]+$' | head -1); NAMES=$(echo \"$INPUT\" | jq -r '[(.tool_response.results // []) | .[] | select(.status == \"failed\") | \"  - \" + (.title // .name // \"unknown\")] | join(\"\\n\")' 2>/dev/null); if [ \"${FCOUNT:-0}\" -gt \"0\" ] 2>/dev/null; then printf '\\n[QA Engineer] %s test(s) failed — run /investigate-test-failed on each:\\n%s\\n\\n' \"$FCOUNT\" \"$NAMES\"; else printf '\\n[QA Engineer] Tests passed — run /observe-test-run to update AGENT_CONTEXT.md\\n\\n'; fi"
+          }
+        ]
+      },
+      {
+        "matcher": "Bash",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "INPUT=$(cat); CMD=$(echo \"$INPUT\" | jq -r '.tool_input.command // \"\"' 2>/dev/null); if echo \"$CMD\" | grep -qE 'npx playwright test|playwright test'; then OUTPUT=$(echo \"$INPUT\" | jq -r 'if (.tool_response | type) == \"string\" then .tool_response else (.tool_response.output // .tool_response.stdout // \"\") end' 2>/dev/null); FCOUNT=$(echo \"$OUTPUT\" | grep -oE '[0-9]+ failed' | grep -oE '^[0-9]+' | head -1); if [ \"${FCOUNT:-0}\" -gt \"0\" ] 2>/dev/null; then NAMES=$(echo \"$OUTPUT\" | grep -E '^\\s+[0-9]+\\) ' | sed 's/^[[:space:]]*[0-9]*)[[:space:]]*/  - /' | head -10); printf '\\n[QA Engineer] %s test(s) failed — run /investigate-test-failed on each:\\n%s\\n\\n' \"$FCOUNT\" \"$NAMES\"; else printf '\\n[QA Engineer] Tests passed — run /observe-test-run to update AGENT_CONTEXT.md\\n\\n'; fi; fi"
+          }
+        ]
+      },
+      {
+        "matcher": "Write|Edit",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "jq -r '.tool_input.file_path // \"\"' | grep -q '\\.feature$' && printf '\\n[QA Engineer] Feature file written — run /push-zephyr-test-cases to sync test cases with Zephyr Scale\\n\\n' || true"
+          }
+        ]
+      },
+      {
+        "matcher": "Write|Edit",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "jq -r '.tool_input.file_path // \"\"' | grep -q '\\.nl\\.md$' && printf '\\n[QA Engineer] NL spec file written — run /generate-from-nl-spec to generate tests and update the manifest\\n\\n' || true"
+          }
+        ]
+      }
+    ],
+    "Stop": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "[ -d .playwright-mcp ] && find .playwright-mcp -name '*.log' -newer context-docs/AGENT_CONTEXT.md 2>/dev/null | grep -q . && printf '\\n[QA Engineer] New MCP session artifacts found — run /observe-test-run to update AGENT_CONTEXT.md\\n\\n' || true"
+          }
+        ]
+      }
+    ]
+  }
+}

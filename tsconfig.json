@@ -1,0 +1,29 @@
+{
+    "compilerOptions": {
+        "moduleResolution": "bundler",
+        "module": "ESNext",
+        "target": "ES2020",
+
+        "lib": [
+            "ES2024"
+        ],
+
+        "types": [
+            "node",
+            "@playwright/test"
+        ],
+
+        "outDir": "out",
+
+        "esModuleInterop": true,
+        "skipLibCheck": true,
+        "noEmit": true,
+        "allowImportingTsExtensions": true,
+        "resolveJsonModule": true,
+        "strict": true,
+        "allowSyntheticDefaultImports": true,
+        "isolatedModules": true
+    },
+    "include": ["src", "playwright.config.ts", "globals.d.ts"],
+    "exclude": ["node_modules", "out"]
+}

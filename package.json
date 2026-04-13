@@ -1,0 +1,21 @@
+{
+  "name": "thaurus",
+  "version": "1.0.0",
+  "description": "Thaurus E2E test automation project built on Thaurus",
+  "type": "module",
+  "scripts": {
+    "test": "npx playwright test",
+    "test:headed": "npx playwright test --headed",
+    "test:debug": "npx playwright test --debug",
+    "allure:setup": "rimraf allure-results allure-report",
+    "allure:generate": "allure generate allure-results --clean -o allure-report && allure open allure-report"
+  },
+  "dependencies": {
+    "@sgwshub/themis": "^2.0.81"
+  },
+  "devDependencies": {
+    "@playwright/test": "^1.57.0",
+    "@types/node": "^24.0.0",
+    "typescript": "^6.0.2"
+  }
+}

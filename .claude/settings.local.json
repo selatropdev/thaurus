@@ -1,0 +1,12 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(*)",
+      "Write(*)",
+      "Edit(*)",
+      "mcp__playwright__browser_wait_for",
+      "mcp__playwright__browser_navigate",
+      "mcp__playwright__browser_tabs"
+    ]
+  }
+}
