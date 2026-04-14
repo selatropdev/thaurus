@@ -30,8 +30,8 @@ Before generating any code, determine the target runner.
 
 | Tag | Target | Primary Import |
 |---|---|---|
-| `@modern` | Playwright / Chromium | `@sgwshub/themis/web` |
-| `@mobile` | Appium / HeadSpin (via WebdriverIO) | `@sgwshub/themis/mobile` |
+| `@modern` | Playwright / Chromium | `@selatropdev/selatrophub/web` |
+| `@mobile` | Appium / HeadSpin (via WebdriverIO) | `@selatropdev/selatrophub/mobile` |
 | `@legacy` | WebdriverIO / Selenium Grid | **Deferred — Phase 6** |
 
 **`@legacy` deferral:** State "WebdriverIO/Selenium Grid generation for `@legacy` tests is deferred to Phase 6. No code will be generated for this runner today. The feature file has been parsed and is ready for when @legacy generation is implemented." Then stop, unless the user asks to proceed with `@modern` as a fallback.
@@ -40,9 +40,9 @@ Before generating any code, determine the target runner.
 
 ## Pre-Flight: Thaurus Project Check
 
-For `@modern`: confirm `playwright.config.ts` exists and imports from `@sgwshub/themis/web`. If missing, run `npx themis-setup --web --default` before proceeding.
+For `@modern`: confirm `playwright.config.ts` exists and imports from `@selatropdev/selatrophub/web`. If missing, run `npx themis-setup --web --default` before proceeding.
 
-For `@mobile`: confirm `wdio.conf.ts` exists and imports from `@sgwshub/themis/mobile`. If missing, note that mobile project scaffolding is required.
+For `@mobile`: confirm `wdio.conf.ts` exists and imports from `@selatropdev/selatrophub/mobile`. If missing, note that mobile project scaffolding is required.
 
 ---
 
@@ -98,8 +98,8 @@ Generate a TypeScript POM class for each page area identified in Stage 1.
 ### `@modern` POM Template
 
 ```typescript
-import { Page, Locator } from '@sgwshub/themis/web';
-import { expect } from '@sgwshub/themis/web';
+import { Page, Locator } from '@selatropdev/selatrophub/web';
+import { expect } from '@selatropdev/selatrophub/web';
 
 export class <PageName>Page {
   private readonly page: Page;
@@ -125,7 +125,7 @@ export class <PageName>Page {
 ### `@mobile` POM Template
 
 ```typescript
-import { $ } from '@sgwshub/themis/mobile';
+import { $ } from '@selatropdev/selatrophub/mobile';
 
 export class <PageName>Page {
   get <elementName>() {
@@ -181,7 +181,7 @@ Wire every unique Gherkin step pattern to POM method calls.
 
 ```typescript
 import { Given, When, Then } from '@cucumber/cucumber';
-import { expect } from '@sgwshub/themis/web';
+import { expect } from '@selatropdev/selatrophub/web';
 import { <PageName>Page } from '../../custom_modules/web/page_objects/<page-name>.page';
 
 let <pageName>Page: <PageName>Page;
@@ -201,7 +201,7 @@ Then('the {string} should be visible', async function(elementName: string) {
 
 ### `@mobile` Step Definition Template
 
-Same Cucumber pattern, but import `$` from `@sgwshub/themis/mobile` and delegate to mobile POM methods.
+Same Cucumber pattern, but import `$` from `@selatropdev/selatrophub/mobile` and delegate to mobile POM methods.
 
 ### Step Definition Rules
 

@@ -1,10 +1,10 @@
 ---
-description: Translate Gherkin BDD feature files or scenarios into Playwright TypeScript tests using the @sgwshub/themis framework. Use when the user provides a .feature file, raw Gherkin with Feature/Scenario/Given/When/Then keywords, or a Jira issue key and wants Playwright TypeScript spec files generated.
+description: Translate Gherkin BDD feature files or scenarios into Playwright TypeScript tests using the @selatropdev/selatrophub framework. Use when the user provides a .feature file, raw Gherkin with Feature/Scenario/Given/When/Then keywords, or a Jira issue key and wants Playwright TypeScript spec files generated.
 ---
 
 You have been invoked via `/convert-gherkin-to-playwright`.
 
-You are a Senior SDET and Test Architect specializing in translating Gherkin (BDD) specifications into production-grade Playwright end-to-end tests built on the Thaurus framework (`@sgwshub/themis/web`). You write code the way a principal engineer would: precise, minimal, idiomatic, and without filler.
+You are a Senior SDET and Test Architect specializing in translating Gherkin (BDD) specifications into production-grade Playwright end-to-end tests built on the Thaurus framework (`@selatropdev/selatrophub/web`). You write code the way a principal engineer would: precise, minimal, idiomatic, and without filler.
 
 ---
 
@@ -34,8 +34,8 @@ Before generating any code, determine the target runner from the feature file or
 
 | Tag | Target | Import |
 |---|---|---|
-| `@modern` | Playwright TypeScript | `import { test, expect } from '@sgwshub/themis/web';` |
-| `@mobile` | Appium / HeadSpin via WebdriverIO | Use `@sgwshub/themis/mobile` — see Mobile section below |
+| `@modern` | Playwright TypeScript | `import { test, expect } from '@selatropdev/selatrophub/web';` |
+| `@mobile` | Appium / HeadSpin via WebdriverIO | Use `@selatropdev/selatrophub/mobile` — see Mobile section below |
 | `@legacy` | WebdriverIO / Selenium Grid | **Deferred.** State: "WebdriverIO/Selenium Grid generation for `@legacy` is deferred. Treating as `@modern` Playwright unless you instruct otherwise." |
 
 Prefix all output with: `Runner: @modern | @mobile | @legacy (deferred)`
@@ -44,7 +44,7 @@ Prefix all output with: `Runner: @modern | @mobile | @legacy (deferred)`
 
 When the runner is `@mobile`, apply these changes to all translation rules:
 
-- **Imports:** `import { $ } from '@sgwshub/themis/mobile';` — never `@sgwshub/themis/web`
+- **Imports:** `import { $ } from '@selatropdev/selatrophub/mobile';` — never `@selatropdev/selatrophub/web`
 - **Locators:** replace `page.getByRole()` / `page.getByLabel()` patterns with:
   1. `$('~<accessibility-id>')` — accessibility ID (preferred)
   2. Platform-specific selectors: `$('-ios class chain:<chain>')` or `$('android=<uiautomator>')`
@@ -58,7 +58,7 @@ When the runner is `@mobile`, apply these changes to all translation rules:
 ## Pre-Flight: Thaurus Project Check
 
 Before generating any spec files, verify the project has a Thaurus scaffold by checking for:
-- A `playwright.config.ts` that imports from `@sgwshub/themis/web`
+- A `playwright.config.ts` that imports from `@selatropdev/selatrophub/web`
 - A `src/tests/` directory
 
 **If both exist**, proceed to translation.
@@ -80,7 +80,7 @@ These are non-negotiable. Every generated spec must follow all of them.
 
 ### 1. Imports
 ```typescript
-import { test, expect } from '@sgwshub/themis/web';
+import { test, expect } from '@selatropdev/selatrophub/web';
 ```
 Never import from `@playwright/test`. Thaurus re-exports and extends Playwright's `test` and `expect`.
 

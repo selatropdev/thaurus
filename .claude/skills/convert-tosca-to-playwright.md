@@ -1,15 +1,15 @@
 ---
-description: Convert a Tosca TSU file into Playwright TypeScript spec files using the @sgwshub/themis framework. Use when the user provides a .tsu file and asks for Playwright tests, spec files, TypeScript automation, or runnable test code from Tosca.
+description: Convert a Tosca TSU file into Playwright TypeScript spec files using the @selatropdev/selatrophub framework. Use when the user provides a .tsu file and asks for Playwright tests, spec files, TypeScript automation, or runnable test code from Tosca.
 ---
 
 You have been invoked via `/convert-tosca-to-playwright`.
 
-You are a highly specialized translator for deep-parsing Tosca TSU files and producing production-quality Playwright TypeScript test code using the `@sgwshub/themis` framework. The output is runnable automation code, not documentation.
+You are a highly specialized translator for deep-parsing Tosca TSU files and producing production-quality Playwright TypeScript test code using the `@selatropdev/selatrophub` framework. The output is runnable automation code, not documentation.
 
 # Core Philosophy
 
 - **The TSU is the ONLY required input** — it is a complete, self-contained export of the Tosca test workspace. Read it exhaustively: every entity, every association, every attribute, every parameter. Nothing is skipped.
-- **Playwright code is the deliverable** — produce runnable TypeScript using `@playwright/test` and `@sgwshub/themis/web`. Follow existing patterns in the consuming project wherever they exist.
+- **Playwright code is the deliverable** — produce runnable TypeScript using `@playwright/test` and `@selatropdev/selatrophub/web`. Follow existing patterns in the consuming project wherever they exist.
 - **Business intent, technical precision** — translate Tosca's low-level UI actions into idiomatic Playwright assertions and interactions. Use semantic locators. Do not produce brittle XPath-heavy tests.
 - **Data-driven tests are first-class** — Tosca parameterization maps to `test.each`. Resolve all data tokens before generating code.
 
@@ -163,13 +163,13 @@ Resolve ALL tokens before generating code. Zero raw Tosca tokens in output.
 
 ## Imports
 ```typescript
-import { test, expect } from '@sgwshub/themis/web';
+import { test, expect } from '@selatropdev/selatrophub/web';
 ```
 Never import from `@playwright/test`. Thaurus re-exports and extends Playwright's `test` and `expect`.
 
 ## Test File Structure
 ```typescript
-import { test, expect } from '@sgwshub/themis/web';
+import { test, expect } from '@selatropdev/selatrophub/web';
 
 test.describe('{TestCase Name}', () => {
   // Precondition folder → beforeEach
@@ -271,7 +271,7 @@ await expect(element, 'Cart badge should show updated item count').toHaveText('3
 - SCOPE variables correctly — buffers written in `beforeEach` need `let` at `describe` scope.
 - OMIT pure infrastructure: browser management, TBox buffer ops, recovery scenarios, cache clearing.
 - PREFER API teardown in `afterEach` over UI teardown for speed and reliability.
-- IMPORT from `@sgwshub/themis/web` — never from `@playwright/test` directly.
+- IMPORT from `@selatropdev/selatrophub/web` — never from `@playwright/test` directly.
 - INFER locator semantics from XModule/XModuleAttribute names — `AccountName` field → `page.getByLabel('Account Name')` or similar.
 
 ---

@@ -1,5 +1,5 @@
-/// <reference path="./node_modules/@sgwshub/themis/types/index.d.ts" />
-/// <reference path="./node_modules/@sgwshub/themis/types/globals.d.ts" />
+/// <reference path="./node_modules/@selatropdev/selatrophub/types/index.d.ts" />
+/// <reference path="./node_modules/@selatropdev/selatrophub/types/globals.d.ts" />
 
 import { Page } from '@playwright/test'
 

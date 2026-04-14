@@ -154,7 +154,7 @@ When given a test plan file or a plan section:
 // spec: specs/plan.md
 // seed: tests/seed.spec.ts
 
-import { test, expect } from '@sgwshub/themis/web';
+import { test, expect } from '@selatropdev/selatrophub/web';
 
 test.describe('Feature Name', () => {
   test('Scenario Name', async ({ page }) => {
