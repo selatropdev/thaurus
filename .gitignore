@@ -8,5 +8,6 @@ playwright-report/
 test-results/
 .playwright-mcp/
 *.log
+*.tgz
 .env.local
 .env.*.local

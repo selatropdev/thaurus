@@ -1,8 +1,12 @@
 {
-  "name": "thaurus",
+  "name": "@selatrophub/thaurus",
   "version": "1.0.0",
   "description": "Thaurus E2E test automation project built on Thaurus",
   "type": "module",
+  "publishConfig": {
+    "access": "public",
+    "registry": "https://registry.npmjs.org/"
+  },
   "scripts": {
     "test": "npx playwright test",
     "test:headed": "npx playwright test --headed",
