@@ -1,5 +1,5 @@
-/// <reference path="./node_modules/@selatropdev/selatrophub/types/index.d.ts" />
-/// <reference path="./node_modules/@selatropdev/selatrophub/types/globals.d.ts" />
+// When @selatropdev/selatrophub is installed, those types apply; see typings/ for build without it.
+/// <reference path="./typings/selatrophub-web.d.ts" />
 
 import { Page } from '@playwright/test'
 

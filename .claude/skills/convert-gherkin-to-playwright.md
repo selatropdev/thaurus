@@ -1,5 +1,5 @@
 ---
-description: Translate Gherkin BDD feature files or scenarios into Playwright TypeScript tests using the @selatropdev/selatrophub framework. Use when the user provides a .feature file, raw Gherkin with Feature/Scenario/Given/When/Then keywords, or a Jira issue key and wants Playwright TypeScript spec files generated.
+description: Translate Gherkin BDD feature files or scenarios into Playwright TypeScript tests. Project scaffold from @selatropdev/thaurus; runtime imports from @selatropdev/selatrophub/web. Use when the user provides a .feature file, raw Gherkin with Feature/Scenario/Given/When/Then keywords, or a Jira issue key and wants Playwright TypeScript spec files generated.
 ---
 
 You have been invoked via `/convert-gherkin-to-playwright`.

@@ -24,6 +24,6 @@
         "allowSyntheticDefaultImports": true,
         "isolatedModules": true
     },
-    "include": ["src", "playwright.config.ts", "globals.d.ts"],
+    "include": ["src", "playwright.config.ts", "globals.d.ts", "typings"],
     "exclude": ["node_modules", "out"]
 }

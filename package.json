@@ -1,13 +1,25 @@
 {
-  "name": "@selatrophub/thaurus",
-  "version": "1.0.1",
+  "name": "@selatropdev/thaurus",
+  "version": "1.0.3",
   "description": "Thaurus E2E test automation project built on Thaurus",
   "type": "module",
+  "files": [
+    "src",
+    "playwright.config.ts",
+    "globals.d.ts",
+    "typings",
+    "tsconfig.json",
+    "context-docs",
+    ".claude"
+  ],
   "publishConfig": {
     "access": "public",
     "registry": "https://npm.pkg.github.com/"
   },
   "scripts": {
+    "build": "tsc --noEmit",
+    "package": "npm run build && npm pack",
+    "prepublishOnly": "npm run build",
     "test": "npx playwright test",
     "test:headed": "npx playwright test --headed",
     "test:debug": "npx playwright test --debug",
