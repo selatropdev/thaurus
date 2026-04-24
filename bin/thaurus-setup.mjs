@@ -256,6 +256,7 @@ async function main() {
 Usage:
   npx -p @selatropdev/thaurus@latest thaurus-setup
   npx thaurus-setup              # after: npm i @selatropdev/thaurus
+  npx thaurus-setup              # also works if the "thaurus-setup" package is published on npmjs (see thaurus-setup-bin/ in the repo)
 
 Options:
   --force         Overwrite config files and .npmrc
