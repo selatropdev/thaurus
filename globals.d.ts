@@ -1,6 +1,3 @@
-// When @selatropdev/selatrophub is installed, those types apply; see typings/ for build without it.
-/// <reference path="./typings/selatrophub-web.d.ts" />
-
 import { Page } from '@playwright/test'
 
 declare global {

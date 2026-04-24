@@ -1,7 +1,7 @@
 #!/usr/bin/env node
 /**
- * Thaurus QA automation setup (replaces themis-setup for this stack).
- * Installs Playwright, TypeScript, @selatropdev/selatrophub, scaffolds config and src.
+ * Thaurus QA automation CLI for the selatropdev org.
+ * Installs Playwright + TypeScript, scaffolds config and src.
  *
  * Run: npx -p @selatropdev/thaurus@latest thaurus-setup
  * Or:  npm install @selatropdev/thaurus@latest && npx thaurus-setup
@@ -26,12 +26,8 @@ const DIRS = [
   "src/custom_modules/web/page_objects",
   "src/pages",
   "context-docs",
-  "typings",
 ]
 
-const DEPS = {
-  "@selatropdev/selatrophub": "^2.0.81",
-}
 const DEV_DEPS = {
   "@playwright/test": "^1.57.0",
   "@types/node": "^24.0.0",
@@ -152,7 +148,7 @@ async function mergeOrCreatePackageJson(force) {
     build: "tsc --noEmit",
     ...(pkg.scripts || {}),
   }
-  pkg.dependencies = { ...DEPS, ...pkg.dependencies }
+  pkg.dependencies = { ...(pkg.dependencies || {}) }
   pkg.devDependencies = { ...DEV_DEPS, ...pkg.devDependencies }
   await writeFile(pkgPath, JSON.stringify(pkg, null, 2) + "\n", "utf8")
   console.log("  update: package.json")
@@ -180,17 +176,17 @@ async function scaffoldDirs() {
     await mkdir(join(root, d), { recursive: true })
   }
   for (const d of DIRS) {
-    if (d === "typings" || d === "src/config") continue
+    if (d === "src/config") continue
     const g = join(root, d, ".gitkeep")
     if (!(await pathExists(g))) await writeFile(g, "", "utf8")
   }
 }
 
 const INLINE_PLAYWRIGHT = `import './src/globals'
-import { pwConfiguration } from "@selatropdev/selatrophub/web";
+import { defineConfig } from '@playwright/test'
 
-export default pwConfiguration({
-    timeout: 30000
+export default defineConfig({
+  timeout: 30000,
 })
 `
 
@@ -211,29 +207,20 @@ const INLINE_TSCONFIG = `{
     "allowSyntheticDefaultImports": true,
     "isolatedModules": true
   },
-  "include": ["src", "playwright.config.ts", "globals.d.ts", "typings"],
+  "include": ["src", "playwright.config.ts", "globals.d.ts"],
   "exclude": ["node_modules", "out"]
 }
 `
 
-const INLINE_GLOBALS_DTS = `// Thaurus — add @selatropdev/selatrophub types when installed; local fallback:
-/// <reference path="./typings/selatrophub-web.d.ts" />
-
-import { Page } from '@playwright/test'
+const INLINE_GLOBALS_DTS = `import { Page } from '@playwright/test'
 
 declare global {
+    // Register page object factories here as they are created
+    // Example:
+    // let LoginPage: (page: Page) => import('./src/pages/LoginPage').LoginPage
 }
 
-export {}
-`
-
-const INLINE_TYPIINGS = `/** Minimal types when @selatropdev/selatrophub is not installed (CI / IDE only). */
-declare module '@selatropdev/selatrophub/web' {
-  import type { PlaywrightTestConfig } from '@playwright/test'
-  export function pwConfiguration(
-    options: { timeout?: number; [k: string]: unknown }
-  ): PlaywrightTestConfig
-}
+export {};
 `
 
 const INLINE_GLOBALS = `import { Page } from "@playwright/test";
@@ -289,7 +276,6 @@ Before install: ensure .npmrc can read GitHub Packages for @selatropdev, e.g.:
   await copyOrWrite("playwright.config.ts", INLINE_PLAYWRIGHT, force)
   await copyOrWrite("tsconfig.json", INLINE_TSCONFIG, force)
   await copyOrWrite("globals.d.ts", INLINE_GLOBALS_DTS, force)
-  await copyOrWrite("typings/selatrophub-web.d.ts", INLINE_TYPIINGS, force)
   await writeFileUnlessExists("src/globals.ts", INLINE_GLOBALS, force)
   await writeFileUnlessExists("src/config/credentials.ts", INLINE_CRED, force)
   await writeFileUnlessExists("src/config/environment.ts", INLINE_ENV, force)

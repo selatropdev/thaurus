@@ -1,5 +1,7 @@
 # AGENT_CONTEXT.md — Thaurus
 
+- **GitHub org:** [selatropdev](https://github.com/selatropdev) — **npm package:** `@selatropdev/thaurus` (GitHub Packages).
+
 > QA Engineer reads this file at the start of every browser-based or test-related task.
 > Update this file after every browser session with confirmed selectors, wait strategies, and quirks.
 

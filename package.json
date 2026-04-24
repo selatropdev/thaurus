@@ -1,7 +1,7 @@
 {
   "name": "@selatropdev/thaurus",
-  "version": "1.0.6",
-  "description": "Thaurus E2E test automation project built on Thaurus",
+  "version": "1.0.8",
+  "description": "Thaurus E2E test automation for the selatropdev GitHub org (Playwright + TypeScript).",
   "bin": {
     "thaurus-setup": "bin/thaurus-setup.mjs"
   },
@@ -19,7 +19,6 @@
     "src",
     "playwright.config.ts",
     "globals.d.ts",
-    "typings",
     "tsconfig.json",
     "context-docs",
     ".claude"

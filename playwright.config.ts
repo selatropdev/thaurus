@@ -1,6 +1,6 @@
 import './src/globals'
-import { pwConfiguration } from "@selatropdev/selatrophub/web";
+import { defineConfig } from '@playwright/test'
 
-export default pwConfiguration({
-    timeout: 30000
+export default defineConfig({
+  timeout: 30000,
 })
