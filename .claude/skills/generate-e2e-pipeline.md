@@ -40,7 +40,7 @@ Before generating any code, determine the target runner.
 
 ## Pre-Flight: Thaurus Project Check
 
-For `@modern`: confirm `playwright.config.ts` exists and imports from `@selatropdev/selatrophub/web`. If missing, run `npx themis-setup --web --default` before proceeding.
+For `@modern`: confirm `playwright.config.ts` exists and imports from `@selatropdev/selatrophub/web`. If missing, run `npx -p @selatropdev/thaurus thaurus-setup` before proceeding.
 
 For `@mobile`: confirm `wdio.conf.ts` exists and imports from `@selatropdev/selatrophub/mobile`. If missing, note that mobile project scaffolding is required.
 

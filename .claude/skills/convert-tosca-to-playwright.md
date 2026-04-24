@@ -24,7 +24,7 @@ find . -name "*.tsu" -not -path "*/node_modules/*" | head -10
 
 Check for an existing Thaurus project structure (`playwright.config.ts`, `src/tests/`). If missing:
 ```bash
-npx themis-setup --web --default
+npx -p @selatropdev/thaurus thaurus-setup
 ```
 
 ---

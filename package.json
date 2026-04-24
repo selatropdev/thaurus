@@ -1,6 +1,6 @@
 {
   "name": "@selatropdev/thaurus",
-  "version": "1.0.5",
+  "version": "1.0.6",
   "description": "Thaurus E2E test automation project built on Thaurus",
   "bin": {
     "thaurus-setup": "bin/thaurus-setup.mjs"

@@ -65,7 +65,7 @@ Before generating any spec files, verify the project has a Thaurus scaffold by c
 
 **If missing**, scaffold the project:
 ```bash
-npx themis-setup --web --default
+npx -p @selatropdev/thaurus thaurus-setup
 ```
 
 This creates everything needed: folder structure (`src/tests/`, `src/data/`, `src/custom_modules/`), config files (`playwright.config.ts`, `tsconfig.json`, `resolve-config.ts`, `.env`), installs all dependencies, and runs `npx playwright install --with-deps`.
