@@ -1,7 +1,10 @@
 {
   "name": "@selatropdev/thaurus",
-  "version": "1.0.4",
+  "version": "1.0.5",
   "description": "Thaurus E2E test automation project built on Thaurus",
+  "bin": {
+    "thaurus-setup": "bin/thaurus-setup.mjs"
+  },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/selatropdev/thaurus.git"
@@ -12,6 +15,7 @@
   },
   "type": "module",
   "files": [
+    "bin",
     "src",
     "playwright.config.ts",
     "globals.d.ts",
