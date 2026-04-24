@@ -1,7 +1,15 @@
 {
   "name": "@selatropdev/thaurus",
-  "version": "1.0.3",
+  "version": "1.0.4",
   "description": "Thaurus E2E test automation project built on Thaurus",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/selatropdev/thaurus.git"
+  },
+  "homepage": "https://github.com/selatropdev/thaurus#readme",
+  "bugs": {
+    "url": "https://github.com/selatropdev/thaurus/issues"
+  },
   "type": "module",
   "files": [
     "src",
